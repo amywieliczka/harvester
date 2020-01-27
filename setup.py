@@ -69,8 +69,7 @@ setup(
         'UCLDC-Deep-Harvester',
         'boto3==1.9.160',
         'pynux',
-        'mediajson',
-        'extruct'
+        'mediajson'
         ],
     test_suite='test',
     tests_require=['mock>=1.0.1', 'httpretty==0.9.5', ],
