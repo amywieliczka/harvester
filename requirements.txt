@@ -1,2 +1,3 @@
 extruct
 rdflib
+requests
