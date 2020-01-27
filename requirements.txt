@@ -1,3 +1,6 @@
 extruct
 rdflib
-requests
+requests==2.11.1
+httpretty==0.8.3
+mock>=1.0.1
+git+https://github.com/mredar/ingestion.git
