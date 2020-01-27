@@ -14,7 +14,7 @@ install:
   - "mkdir -p ${HOME}/.aws"
   - "cp awsconfig ~/.aws/config"
   - "cp pynuxrc ~/.pynuxrc"
-  - "pip install requirements.txt"
+  - "pip install -r requirements.txt"
   - "pip install httpretty==0.8.3"
   - "pip install mock>=1.0.1"
   - "pip install git+https://github.com/mredar/ingestion.git"
