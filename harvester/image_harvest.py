@@ -21,6 +21,7 @@ from harvester.couchdb_init import get_couchdb
 from harvester.config import config
 from redis import Redis
 import redis_collections
+from httplib import BadStatusLine
 from harvester.couchdb_pager import couchdb_pager
 from harvester.cleanup_dir import cleanup_work_dir
 from harvester.sns_message import publish_to_harvesting
