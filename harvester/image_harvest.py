@@ -181,12 +181,14 @@ class ImageHarvester(object):
                  hash_cache=None,
                  harvested_object_cache=None):
         self._config = config()
+        if not url_couchdb:
+            self.url_couchdb = self._config['couchdb_url']
+        else:
+            self.url_couchdb = url_couchdb
         if cdb:
             self._couchdb = cdb
         else:
-            if not url_couchdb:
-                url_couchdb = self._config['couchdb_url']
-            self._couchdb = get_couchdb(url=url_couchdb, dbname=couchdb_name)
+            self._couchdb = get_couchdb(url=self.url_couchdb, dbname=couchdb_name)
         self._bucket_bases = bucket_bases
         self._view = couch_view
         # auth is a tuple of username, password
@@ -224,6 +226,12 @@ class ImageHarvester(object):
         doc['object'] = report.md5
         doc['object_dimensions'] = report.dimensions
         try:
+            self._couchdb.save(doc)
+        except BadStatusLine as e:
+            msg = 'BadStatusLine for doc: {} - {}'.format(doc[
+                '_id'], e.message)
+            print >> sys.stderr, msg
+            self._couchdb = get_couchdb(url=self.url_couchdb)
             self._couchdb.save(doc)
         except ResourceConflict as e:
             msg = 'ResourceConflictfor doc: {} - {}'.format(doc[
